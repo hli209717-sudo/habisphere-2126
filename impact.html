@@ -647,6 +647,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
 .an-go.an-cardL { animation-name:kfFromL; animation-duration:1.45s; }
 .an-go.an-cardR { animation-name:kfFromR; animation-duration:1.45s; }
 .an-go.an-curtain { animation-name:kfCurtain; animation-duration:1.95s; }
+.an-go.an-tech { animation-name:kfRise; animation-duration:2.2s; }
 .an-go.an-drop { animation-name:kfDrop; animation-duration:1.3s; animation-timing-function:cubic-bezier(.34,1.4,.64,1); }
 .an-go.an-media { animation-name:kfMedia; animation-duration:2.4s; }
 .an-go.an-num { animation-name:kfRise; }
@@ -755,7 +756,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
     <div class="posture">寰生未来经营产品与服务、管理业务部门、配置资本、建设研发与制造设施、服务客户、应对竞争：<b>获取收入、控制成本、承担经营风险，追求长期盈利与持续增长</b>。</div>
     <div class="facts">
       <div class="fact f-blue"><div class="k">成立时间</div><div class="v">2126 年</div></div>
-      <div class="fact f-amber"><div class="k">初始资本</div></div>
+      <div class="fact f-amber"><div class="k">初始资本</div><div class="v">1000 亿元</div></div>
       <div class="fact"><div class="k">业务组织</div><div class="v">五大事业群</div></div>
       <div class="fact"><div class="k">产业版图</div><div class="v">四大经济<span class="u">数字·工业·生命·空间</span></div></div>
     </div>
@@ -1457,6 +1458,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
     ['.slide-main h1, .left h1, .final .t, .brand-cn, .tagline', 'an-hero'],
     ['.grp-kicker', 'an-kicker'],
     ['.slide-header', 'an-drop'],
+    ['.tech', 'an-tech'],
     ['.photo, .hero, .bgimg', 'an-curtain'],
     ['.prod, .core-card, .col, .tier, .rk, .stage, .zone, .mv-card, .fact, .rival, .item, .layer', 'an-card']
   ];
@@ -1486,7 +1488,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
     var raw=m[0], target=parseInt(raw.replace(/,/g,''),10);
     if(isNaN(target)) return;
     var prefix=node.textContent.slice(0,m.index), suffix=node.textContent.slice(m.index+raw.length);
-    var host = el.closest('.an-rise, .an-cardL, .an-cardR, .an-hero, .an-media, .an-curtain, .an-drop, .an-kicker');
+    var host = el.closest('.an-rise, .an-cardL, .an-cardR, .an-hero, .an-media, .an-curtain, .an-drop, .an-kicker, .an-tech');
     var delay = host ? (parseFloat(host.style.animationDelay)||0) : 0, t0=null, dur=1900;
     setTimeout(function(){
       if(token!==animToken) return;
