@@ -642,7 +642,12 @@ body::before { content:""; position:fixed; inset:-25%; background:
 /* 元素动效分类：创意编排（揭示/合拢/幕布/弹落） */
 .anv { opacity:0; }
 .an-go { animation-duration:1.5s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both; }
-.an-go.an-hero { animation-name:kfReveal; animation-duration:1.45s; }
+.an-go.an-hero, .an-go.an-hero2, .an-go.an-hero3, .an-go.an-hero4, .an-go.an-hero5 { animation-duration:1.45s; }
+.an-go.an-hero  { animation-name:kfReveal; }
+.an-go.an-hero2 { animation-name:kfMaskUp; }
+.an-go.an-hero3 { animation-name:kfZoomSoft; }
+.an-go.an-hero4 { animation-name:kfRevealR; }
+.an-go.an-hero5 { animation-name:kfRiseBlur; }
 .an-go.an-kicker { animation-name:kfKicker; animation-duration:1.55s; }
 .an-go.an-cardL { animation-name:kfFromL; animation-duration:1.45s; }
 .an-go.an-cardR { animation-name:kfFromR; animation-duration:1.45s; }
@@ -657,6 +662,24 @@ body::before { content:""; position:fixed; inset:-25%; background:
   0%   { opacity:0; transform:translateX(-26px); clip-path:inset(0 100% 0 0); filter:blur(5px); }
   60%  { filter:blur(0); }
   100% { opacity:1; transform:none; clip-path:inset(0 0 0 0); filter:blur(0); }
+}
+/* 标题变体：下幕掠过 / 微缩聚焦 / 右擦 / 浮升聚焦 */
+@keyframes kfMaskUp {
+  0%   { opacity:0; clip-path:inset(0 0 100% 0); transform:translateY(-14px); }
+  100% { opacity:1; clip-path:inset(0 0 0 0); transform:none; }
+}
+@keyframes kfZoomSoft {
+  0%   { opacity:0; transform:scale(1.055); filter:blur(6px); }
+  100% { opacity:1; transform:scale(1); filter:blur(0); }
+}
+@keyframes kfRevealR {
+  0%   { opacity:0; transform:translateX(26px); clip-path:inset(0 0 0 100%); filter:blur(5px); }
+  100% { opacity:1; transform:none; clip-path:inset(0 0 0 0); filter:blur(0); }
+}
+@keyframes kfRiseBlur {
+  0%   { opacity:0; transform:translateY(30px); filter:blur(10px); }
+  60%  { filter:blur(2px); }
+  100% { opacity:1; transform:none; filter:blur(0); }
 }
 /* kicker：字距收拢 */
 @keyframes kfKicker {
@@ -1466,8 +1489,14 @@ body::before { content:""; position:fixed; inset:-25%; background:
     for (var c=0;c<CATS.length;c++){ if (el.matches(CATS[c][0])) return CATS[c][1]; }
     return 'an-rise';
   }
+  var HERO_MAP = {1:'an-hero5',2:'an-hero',3:'an-hero2',4:'an-hero3',5:'an-hero4',6:'an-hero',7:'an-hero2',8:'an-hero3',9:'an-hero4',10:'an-hero5',11:'an-hero',12:'an-hero2',13:'an-hero3',14:'an-hero4',15:'an-hero5',16:'an-hero',17:'an-hero2',18:'an-hero3',19:'an-hero4',20:'an-hero5'};
   function resolveCat(el){
     var cat = catOf(el);
+    if(cat === 'an-hero'){
+      var pg = el.closest('.pg');
+      var n = pg ? pg.getAttribute('data-i') : '2';
+      cat = HERO_MAP[n] || 'an-hero';
+    }
     if(cat === 'an-card'){
       var r = el.getBoundingClientRect();
       cat = ((r.left + r.width/2) < window.innerWidth/2) ? 'an-cardL' : 'an-cardR';
