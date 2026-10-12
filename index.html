@@ -636,9 +636,9 @@ body::before { content:""; position:fixed; inset:-25%; background:
 @keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(-3.5%,2.5%) scale(1.08); } }
 #stage { position:absolute; left:50%; top:50%; width:1280px; height:720px; transform:translate(-50%,-50%) scale(var(--s,1)); }
 /* 页间景深推拉 */
-.pg { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transform:scale(.96); transition:opacity .65s ease, transform 1s cubic-bezier(.22,1,.36,1), filter 1s ease, visibility 0s linear 1s; z-index:1; }
-.pg.active { opacity:1; visibility:visible; transform:scale(1); transition:opacity .6s ease, transform .95s cubic-bezier(.22,1,.36,1), filter .95s ease; z-index:2; }
-.pg.pre { opacity:0; visibility:hidden; transform:scale(1.07); filter:blur(18px); }
+.pg { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transform:scale(.985); transition:opacity .55s ease, transform .9s cubic-bezier(.22,1,.36,1), visibility 0s linear .9s; z-index:1; }
+.pg.active { opacity:1; visibility:visible; transform:scale(1); transition:opacity .65s ease, transform .85s cubic-bezier(.22,1,.36,1); z-index:2; }
+.pg.pre { opacity:0; visibility:hidden; transform:scale(1.025); filter:blur(6px); }
 /* 元素动效分类：keyframes 引擎（类挂载必然触发） */
 .anv { opacity:0; }
 .an-go { animation-duration:1.25s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both; }
@@ -1519,7 +1519,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
   var wheelLock=false;
   window.addEventListener('wheel', function(e){
     if(wheelLock) return; wheelLock=true;
-    setTimeout(function(){ wheelLock=false; },550);
+    setTimeout(function(){ wheelLock=false; },850);
     if(e.deltaY>20) next(); else if(e.deltaY<-20) prev();
   }, {passive:true});
   var tx=null;
