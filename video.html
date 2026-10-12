@@ -750,7 +750,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
 <div class="pg" data-i="1">
 <div class="slide-container">
   <div class="hero">
-    <video src="assets/videos/cover.mp4" poster="assets/videos/cover.jpg" autoplay muted loop playsinline preload="auto" aria-label="寰生未来全球总部与自动化园区"></video>
+    <video src="assets/videos/cover.mp4" poster="assets/videos/cover.jpg" autoplay muted playsinline preload="auto" data-once="1" aria-label="寰生未来全球总部与自动化园区"></video>
     <div class="veil"></div>
   </div>
   <div class="topright">
@@ -1206,7 +1206,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
       </div>
     </div>
     <div class="photo">
-      <video src="assets/videos/moon.mp4" poster="assets/videos/moon.jpg" autoplay muted loop playsinline preload="auto" aria-label="Lunar Works 月球合作基地"></video>
+      <video src="assets/videos/moon.mp4" poster="assets/videos/moon.jpg" autoplay muted playsinline preload="auto" data-once="1" aria-label="Lunar Works 月球合作基地"></video>
       <div class="veil"></div>
       <div class="cap"><b>Lunar Works</b>｜月球科研基地合作工程</div>
     </div>
@@ -1427,7 +1427,7 @@ body::before { content:""; position:fixed; inset:-25%; background:
 <div class="pg" data-i="20">
 <div class="slide-container">
   <div class="bgimg">
-    <video src="assets/videos/cover.mp4" poster="assets/videos/cover.jpg" autoplay muted loop playsinline preload="auto" aria-label="寰生未来全球总部园区"></video>
+    <video src="assets/videos/cover.mp4" poster="assets/videos/cover.jpg" autoplay muted playsinline preload="auto" data-once="1" aria-label="寰生未来全球总部园区"></video>
     <div class="veil"></div>
   </div>
   <div class="wrap">
@@ -1552,7 +1552,11 @@ body::before { content:""; position:fixed; inset:-25%; background:
     var vs=document.querySelectorAll('.pg video');
     for(var k=0;k<vs.length;k++){
       var v=vs[k], on=v.closest('.pg').classList.contains('active');
-      if(on){ v.muted=true; var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){}); }
+      if(on){
+        v.muted=true;
+        if(v.getAttribute('data-once')&&v.ended){ v.currentTime=0; }
+        var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
+      }
       else{ v.pause(); }
     }
   }
